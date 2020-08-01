@@ -64,7 +64,7 @@ esac
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
-HISTCONTROL=ignoreboth:erasedups
+HISTCONTROL=ignoreboth
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -78,22 +78,21 @@ export HISTFILESIZE=-1
 
 # associate a timestamp with each history entry so that it is saved
 # across multiple sessions
-export HISTIMEFORMAT="%F %T "
+export HISTTIMEFORMAT="%F %T "
 
 # Saving history after every command
 process_command() {
-    history -n; # Read history from bash_history
-    history -w; # Save history to file and erase duplicates
-    history -c; # Clear current history
-    history -r; # Restory history from file
-#   history -a # Append history to history file
-#   history -c # Clear current history
-#   history -r # Reload history from history file
-  echo -ne "\e]0;$BASH_COMMAND\007"
+    # history -n; # Read history from bash_history
+    # history -w; # Save history to file and erase duplicates
+    # history -c; # Clear current history
+    # history -r; # Restory history from file
+  history -a # Append history to history file
+  history -c # Clear current history
+  history -r # Reload history from history file
 }
 
 # Add preexec function since we're using bash-preexec.sh
-preexec_functions+=(process_command)
+precmd_functions+=(process_command)
 
 
 # enable color support of ls and also add handy aliases
@@ -119,6 +118,14 @@ export EDITOR=code-insiders
 # Should work after `sudo apt install fzf`
 if [ -f /usr/share/doc/fzf/examples/key-bindings.bash ]; then
     . /usr/share/doc/fzf/examples/key-bindings.bash
+fi
+
+# fzf plugin for auto execute command
+# https://github.com/4z3/fzf-plugins
+if [ -f ~/.fzf-plugins/history-exec.bash ]; then
+    FZF_CTRL_R_EDIT_KEY=tab
+    FZF_CTRL_R_EXEC_KEY=enter
+    . ~/.fzf-plugins/history-exec.bash
 fi
 
 # Alias definitions.
