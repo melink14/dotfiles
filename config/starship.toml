@@ -1,0 +1,6 @@
+[nodejs]
+disabled = true
+
+[time]
+disabled = false
+format = "🕙 %T"
