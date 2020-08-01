@@ -64,7 +64,7 @@ esac
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
-HISTCONTROL=ignoreboth
+HISTCONTROL=ignoreboth:erasedups
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -82,23 +82,15 @@ export HISTIMEFORMAT="%F %T "
 
 # Saving history after every command
 process_command() {
-  history -a # Append history to history file
-  history -c # Clear current history
-  history -r # Reload history from history file
+    history -n; # Read history from bash_history
+    history -w; # Save history to file and erase duplicates
+    history -c; # Clear current history
+    history -r; # Restory history from file
+#   history -a # Append history to history file
+#   history -c # Clear current history
+#   history -r # Reload history from history file
   echo -ne "\e]0;$BASH_COMMAND\007"
 }
-case "$-" in
-*i*)
-  # Interactive shell
-
-  # Breaks babysitter test if run automatically
-  # The last part sets the window status to the running command.
-  trap 'process_command' DEBUG
-  ;;
-*)
-  # Non-interactive shell
-  ;;
-esac
 
 # in case bash_preexec is installed also try to add one
 if [[ $preexec_functions ]]; then
@@ -126,6 +118,11 @@ alias l='ls -CF'
 alias c='code-insiders'
 export EDITOR=code-insiders
 
+# Should work after `sudo apt install fzf`
+if [ -f /usr/share/doc/fzf/examples/key-bindings.bash ]; then
+    . /usr/share/doc/fzf/examples/key-bindings.bash
+fi
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -149,3 +146,6 @@ fi
 
 # Local config
 [[ -f ~/.bashrc.local ]] && source ~/.bashrc.local
+
+# Enable bash-preexec
+[[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
