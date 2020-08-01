@@ -92,10 +92,8 @@ process_command() {
   echo -ne "\e]0;$BASH_COMMAND\007"
 }
 
-# in case bash_preexec is installed also try to add one
-if [[ $preexec_functions ]]; then
-    preexec_functions+=(process_command)
-fi
+# Add preexec function since we're using bash-preexec.sh
+preexec_functions+=(process_command)
 
 
 # enable color support of ls and also add handy aliases
