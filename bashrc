@@ -149,6 +149,10 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+if [ -f ~/.hg-completion.bash ]; then
+    . ~/.hg-completion.bash
+fi
+
 # Local config
 [[ -f ~/.bashrc.local ]] && source ~/.bashrc.local
 
