@@ -153,6 +153,10 @@ if [ -f ~/.hg-completion.bash ]; then
     . ~/.hg-completion.bash
 fi
 
+# GPG configuration
+GPG_TTY=$(tty)
+export GPG_TTY
+
 # Local config
 [[ -f ~/.bashrc.local ]] && source ~/.bashrc.local
 
