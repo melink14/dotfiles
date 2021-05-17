@@ -3,4 +3,4 @@ disabled = true
 
 [time]
 disabled = false
-format = "🕙 %T"
+format = '🕙[ $time ]($style)'

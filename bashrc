@@ -64,7 +64,7 @@ esac
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
-HISTCONTROL=ignoreboth
+HISTCONTROL=ignoreboth:erasedups
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -80,6 +80,14 @@ export HISTFILESIZE=-1
 # across multiple sessions
 export HISTTIMEFORMAT="%F %T "
 
+# Cleans the history file, removing all duplicate entries.
+clean_bash_history() {
+    mkdir -p /tmp/"$USER"_history
+    tac ~/.bash_history > /tmp/"$USER"_history/bash_history_dirty
+    awk '!visited[$0]++' /tmp/"$USER"_history/bash_history_dirty > /tmp/"$USER"_history/bash_history_cleaned
+    tac /tmp/"$USER"_history/bash_history_cleaned > ~/.bash_history
+}
+
 # Saving history after every command
 process_command() {
     # history -n; # Read history from bash_history
@@ -87,6 +95,7 @@ process_command() {
     # history -c; # Clear current history
     # history -r; # Restory history from file
   history -a # Append history to history file
+  clean_bash_history # Remove duplicate entries
   history -c # Clear current history
   history -r # Reload history from history file
 }
