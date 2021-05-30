@@ -121,8 +121,8 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-alias c='code-insiders'
-export EDITOR=code-insiders
+alias c='code'
+export EDITOR=code
 
 # Should work after `sudo apt install fzf`
 if [ -f /usr/share/doc/fzf/examples/key-bindings.bash ]; then
