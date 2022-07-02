@@ -95,7 +95,7 @@ process_command() {
     # history -c; # Clear current history
     # history -r; # Restory history from file
   history -a # Append history to history file
-  clean_bash_history # Remove duplicate entries
+  # clean_bash_history # Remove duplicate entries
   history -c # Clear current history
   history -r # Reload history from history file
 }
@@ -171,3 +171,6 @@ export GPG_TTY
 
 # Enable bash-preexec
 [[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
+
+# Enable starship prompt
+eval "$(starship init bash)"
