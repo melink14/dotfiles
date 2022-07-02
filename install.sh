@@ -1,8 +1,9 @@
 #!/bin/bash
 
 sudo apt update
-sudo apt install rcm
-sudo apt install fzf
+DEBIAN_FRONTEND=noninteractive \
+  sudo apt \
+  -y install rcm fzf
 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
