@@ -6,6 +6,7 @@ DEBIAN_FRONTEND=noninteractive \
   -y install rcm fzf
 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 
+git clone https://github.com/4z3/fzf-plugins ~/.fzf-plugins
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 RCRC=./rcrc rcup -d .
