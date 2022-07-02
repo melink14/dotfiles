@@ -8,6 +8,6 @@ sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-rcup
+RCRC=./rcrc rcup -d .
 
 echo "Installation complete. Install tmux plugins with <prefix>-I"
